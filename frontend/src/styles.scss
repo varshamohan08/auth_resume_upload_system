@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import 'assets/scss/custom.scss';
+@import 'ngx-toastr/toastr';
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+
+// if you'd like to use it without importing all of bootstrap it requires
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+// boostrap 5
+@import 'ngx-toastr/toastr-bs5-alert';
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+ ),
+ typography: mat.define-typography-config(
+    $font-family: monospace,
+  )
+));
+
+@include mat.all-component-themes($my-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-mdc-tab-body-content {
+    height: 100%;
+    overflow: auto;
+    scrollbar-width: none !important;
+}

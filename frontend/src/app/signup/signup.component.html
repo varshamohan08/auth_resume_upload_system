@@ -1,0 +1,81 @@
+<div class="container mt-4" style="">
+    <div class="row justify-content-center" style="align-items: center;height: 95vh;"> <!-- Add this row -->
+        <div class="col-lg-6 col-md-8 col-sm-12"> <!-- Adjust column width as needed -->
+            <mat-card class="bg-card" style="scrollbar-width: thin;">
+                <mat-card-content>
+                    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" style="height: 625px;">
+                        <mat-tab label="Signup">
+                            <div class="container mt-4 mb-4">
+                                <form [formGroup]="signUpForm" class="row g-3 mt-1">
+                                    <mat-form-field>
+                                        <mat-label>First name</mat-label>
+                                        <input matInput formControlName="first_name" name="first_name" [(ngModel)]="first_name">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput formControlName="last_name" name="last_name" [(ngModel)]="last_name">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Email</mat-label>
+                                        <input matInput formControlName="email" name="email" [(ngModel)]="email">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Enter your password</mat-label>
+                                        <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" name="password" [(ngModel)]="password">
+                                        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                                          <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Confirm password</mat-label>
+                                        <input matInput [type]="hideConfirmPass ? 'password' : 'text'" formControlName="confirmPassword" name="confirmPassword">
+                                        <button mat-icon-button matSuffix (click)="hideConfirmPass = !hideConfirmPass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPass">
+                                          <mat-icon>{{hideConfirmPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                        <mat-error *ngIf="signUpForm.hasError('passwordMismatch', 'confirmPassword')">
+                                          Passwords do not match
+                                        </mat-error>
+                                        <mat-error *ngIf="signUpForm.get('confirmPassword')?.hasError('required')">
+                                          Confirm password is <strong>required</strong>
+                                        </mat-error>
+                                      </mat-form-field>
+                                        <a class="mx-2" mat-fab extended color="primary" type="submit" [disabled]="!signUpForm.valid" (click)="signUp()">
+                                            <!-- <mat-icon>favorite</mat-icon> -->
+                                            &nbsp;Signup&nbsp;
+                                          </a>
+                                    
+                                </form>
+                            </div>
+                            
+                        </mat-tab>
+                        <mat-tab label="Login">
+                            <div class="container mt-4 mb-4">
+                                <form [formGroup]="LoginForm" class="row g-3 mt-1">
+                                    <mat-form-field>
+                                        <mat-label>Email</mat-label>
+                                        <input matInput formControlName="email" name="email" [(ngModel)]="email">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Enter your password</mat-label>
+                                        <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" name="password" [(ngModel)]="password">
+                                        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                                          <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <a class="mx-2" mat-fab extended color="primary" routerLink="." type="submit" [disabled]="!LoginForm.valid" (click)="Login()">
+                                        <!-- <mat-icon>favorite</mat-icon> -->
+                                        &nbsp;Login&nbsp;
+                                      </a>
+                                    
+                                </form>
+                            </div>
+                        </mat-tab>
+                        
+                      </mat-tab-group>
+                </mat-card-content>
+              </mat-card>
+        </div>
+    </div>
+    
+    
+</div>

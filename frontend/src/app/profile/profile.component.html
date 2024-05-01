@@ -1,0 +1,59 @@
+<mat-toolbar>
+    <span class="example-spacer"></span>
+    <button mat-mini-fab matTooltip="Logout" class="example-icon" color="warn" (click)="Logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-4">
+            <mat-card class="bg-card p-4 rounted-0-5">
+                <h2>User profile</h2>
+                <div class="center"><div class="row mt-2">
+                    <div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+                        <small>Name :&nbsp;</small>
+                        <div class="mt-2" style="font-weight: bold;">{{userDict["first_name"] | titlecase}} {{userDict["last_name"] | titlecase}}</div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+                        <small>Email :&nbsp;</small>
+                        <div class="mt-2" style="font-weight: bold;">{{userDict["email"]}}</div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+                        <small>Resume :&nbsp;</small>
+                        
+                        <div class="mt-2" style="font-weight: bold;">
+                            <a target="_blank" href="{{hostAddress}}media/resumes/{{relativePath}}">
+                                {{relativePath}}
+                            </a>
+                        </div>
+                        <span *ngIf="uploadedOn">
+                            <small>Uploaded on :&nbsp;{{uploadedOn | date: 'dd/MM/yyyy, HH:mm:ss'}}</small>
+                            <button mat-mini-fab color="warn" style="margin-top: -2%;" matTooltip="Remove resume" (click)="removeResume()">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </span>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+                        <small>Update resume :&nbsp;</small>
+                    </div>
+                </div>
+                    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            <button mat-icon-button type="button" (click)="openFileSelector()">
+                                <mat-icon>add_box</mat-icon>
+                            </button>
+                        </ng-template>
+                    </ngx-file-drop>
+                    <div *ngFor="let file of files">
+                        {{file.relativePath}}
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
